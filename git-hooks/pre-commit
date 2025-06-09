@@ -1,0 +1,29 @@
+#!/bin/sh
+
+files=$(git diff --cached --name-only --diff-filter=AMCR | grep "\.php$")
+
+if echo "$files" | grep --quiet "\.php$"; then
+    echo "Run Pint to lint the code"
+    ./vendor/bin/pint $files --test
+
+    if [ $? -ne 0 ]; then
+        echo "Code check failed! Please fix the issues above and try committing again."
+        exit 1
+    fi
+
+    ./vendor/bin/rector process --dry-run $files
+
+    if [ $? -ne 0 ]; then
+        echo "Rector detecting issues. Please fix the issues above and try committing again."
+        exit 1
+    fi
+fi
+
+composer run test
+
+if [ $? -ne 0 ]; then
+    echo "Tests failed! Make sure all tests pass."
+    exit 1
+fi
+
+exit 0

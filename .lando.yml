@@ -1,0 +1,33 @@
+name: velora
+recipe: laravel
+config:
+  webroot: public
+  via: nginx
+  php: '8.4'
+  composer_version: '2.8.9'
+  cache: redis
+
+services:
+  appserver:
+    build_as_root:
+      - curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
+      - apt-get install -y nodejs
+      - npm install -g npm@latest
+      - npm install
+      - npm run build
+    ports:
+      - 5173:5173
+  database:
+    type: mysql
+    creds:
+      database: velora
+    portforward: 3307
+
+tooling:
+  node:
+    service: appserver
+  npm:
+    service: appserver
+  dev:
+    service: appserver
+    cmd: composer run dev
