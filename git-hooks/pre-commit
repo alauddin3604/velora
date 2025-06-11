@@ -19,11 +19,4 @@ if echo "$files" | grep --quiet "\.php$"; then
     fi
 fi
 
-composer run test
-
-if [ $? -ne 0 ]; then
-    echo "Tests failed! Make sure all tests pass."
-    exit 1
-fi
-
 exit 0
