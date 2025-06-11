@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Actions\Profile;
 
+use App\Actions\Action;
 use App\DataTransferObjects\ProfileData;
 use App\Models\User;
 
-final readonly class UpdateProfileAction
+final readonly class UpdateProfileAction extends Action
 {
     /**
      * Execute the action.
