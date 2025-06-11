@@ -35,6 +35,15 @@ jobs:
         cp .env.example .env
         php artisan key:generate
 
+    - name: Cache node_modules dependencies
+      uses: actions/cache@v3
+      with:
+        path: ./node_modules
+        key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
+
+    - name: Install node_modules dependencies
+      run: npm install
+
     - name: Run test suite
       run: composer run-script test
 
