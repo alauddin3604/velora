@@ -30,26 +30,26 @@ describe('user has roles', function (): void {
     test('can assign multiple roles to user', function (): void {
         $user = createUser();
 
-        $role1 = Role::create(['name' => 'admin']);
-        $role2 = Role::create(['name' => 'user']);
+        $adminRole = Role::create(['name' => 'admin']);
+        $userRole = Role::create(['name' => 'user']);
 
-        $user->assignRole([$role1, $role2]);
+        $user->assignRole([$adminRole, $userRole]);
 
-        expect($user->hasRole($role1))->toBeTrue();
-        expect($user->hasRole($role2))->toBeTrue();
+        expect($user->hasRole($adminRole))->toBeTrue();
+        expect($user->hasRole($userRole))->toBeTrue();
     });
 
     test('can sync roles to user', function (): void {
         $user = createUser();
 
-        $role1 = Role::create(['name' => 'admin']);
-        $role2 = Role::create(['name' => 'user']);
+        $adminRole = Role::create(['name' => 'admin']);
+        $userRole = Role::create(['name' => 'user']);
 
-        $user->assignRole([$role1, $role2]);
+        $user->assignRole([$adminRole, $userRole]);
 
-        $user->syncRoles($role1);
+        $user->syncRoles($adminRole);
 
-        expect($user->hasRole($role1))->toBeTrue();
-        expect($user->hasRole($role2))->toBeFalse();
+        expect($user->hasRole($adminRole))->toBeTrue();
+        expect($user->hasRole($userRole))->toBeFalse();
     });
 });
