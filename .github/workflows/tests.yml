@@ -42,7 +42,7 @@ jobs:
         key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
 
     - name: Install node_modules dependencies
-      run: npm install
+      run: npm install && npm run build
 
     - name: Run test suite
       run: composer run-script test
