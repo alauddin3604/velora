@@ -2,6 +2,7 @@ import { PageProps as InertiaPageProps } from '@inertiajs/core'
 import { AxiosInstance } from 'axios'
 import ziggyRoute, { Config as ZiggyConfig } from 'ziggy-js'
 import { PageProps as AppPageProps } from './'
+import User from './user.type'
 
 declare global {
   interface Window {
@@ -31,11 +32,7 @@ declare module '@inertiajs/core' {
     }
     auth: {
       id: number
-      user: {
-        id: number
-        name: string
-        email: string
-      }
+      user: User
     }
   }
 }
