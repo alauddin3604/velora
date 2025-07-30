@@ -7,7 +7,6 @@
         "declare_strict_types": true,
         "lowercase_keywords": true,
         "lowercase_static_reference": true,
-        "final_class": true,
         "final_internal_class": true,
         "fully_qualified_strict_types": true,
         "global_namespace_import": {
@@ -19,6 +18,7 @@
         "modernize_types_casting": true,
         "new_with_parentheses": false,
         "no_superfluous_elseif": true,
+        "no_unused_imports": true,
         "no_useless_else": true,
         "no_multiple_statements_per_line": true,
         "ordered_class_elements": {

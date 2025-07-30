@@ -8,7 +8,7 @@ describe('user has roles', function (): void {
     test('can assign role to user', function (): void {
         $user = createUser();
 
-        $role = Role::create(['name' => 'admin']);
+        $role = Role::findByName('admin');
 
         $user->assignRole($role);
 
@@ -18,8 +18,7 @@ describe('user has roles', function (): void {
     test('can remove role from user', function (): void {
         $user = createUser();
 
-        $role = Role::create(['name' => 'admin']);
-
+        $role = Role::findByName('admin');
         $user->assignRole($role);
 
         $user->removeRole($role);
@@ -30,8 +29,8 @@ describe('user has roles', function (): void {
     test('can assign multiple roles to user', function (): void {
         $user = createUser();
 
-        $adminRole = Role::create(['name' => 'admin']);
-        $userRole = Role::create(['name' => 'user']);
+        $adminRole = Role::findByName('admin');
+        $userRole = Role::findByName('user');
 
         $user->assignRole([$adminRole, $userRole]);
 
@@ -42,8 +41,8 @@ describe('user has roles', function (): void {
     test('can sync roles to user', function (): void {
         $user = createUser();
 
-        $adminRole = Role::create(['name' => 'admin']);
-        $userRole = Role::create(['name' => 'user']);
+        $adminRole = Role::findByName('admin');
+        $userRole = Role::findByName('user');
 
         $user->assignRole([$adminRole, $userRole]);
 

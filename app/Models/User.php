@@ -6,12 +6,21 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
-final class User extends Authenticatable
+/**
+ * User model.
+ *
+ * @property string $name
+ * @property string $email
+ * @property string $password
+ * @property string $remember_token
+ */
+class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory;
@@ -51,5 +60,15 @@ final class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Mutator for password.
+     */
+    protected function password(): Attribute
+    {
+        return Attribute::make(
+            set: fn (string $password) => bcrypt($password),
+        );
     }
 }

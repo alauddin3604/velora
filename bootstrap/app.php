@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Middleware\HandleInertiaRequests;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -31,13 +32,13 @@ return Application::configure(basePath: dirname(__DIR__))
                 ]);
             }
 
-            if ($response->getStatusCode() === 403) {
-                return back()->with([
-                    'error' => 'You are not authorized to perform this action.',
-                ]);
-            }
-
             return $response;
+        });
+
+        $exceptions->render(function (Throwable $exception) {
+            if ($exception->getPrevious() instanceof AuthorizationException) {
+                return to_route('dashboard')->with('error', $exception->getMessage());
+            }
         });
     })
     ->create();
