@@ -47,4 +47,15 @@ final class UserController extends Controller
         return to_route('users.index')
             ->with('success', 'User created successfully.');
     }
+
+    /**
+     * Delete the specified user from storage.
+     */
+    public function destroy(User $user): RedirectResponse
+    {
+        $user->delete();
+
+        return to_route('users.index')
+            ->with('success', 'User deleted successfully.');
+    }
 }
