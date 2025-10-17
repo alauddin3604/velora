@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Enums\RoleName;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -42,5 +44,15 @@ class UserFactory extends Factory
         return $this->state(fn (array $attributes): array => [
             'email_verified_at' => null,
         ]);
+    }
+
+    /**
+     * Assign user with role
+     */
+    public function role(RoleName $role): static
+    {
+        return $this->afterCreating(function (User $user) use ($role): void {
+            $user->assignRole($role);
+        });
     }
 }

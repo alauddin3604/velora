@@ -13,6 +13,7 @@ declare(strict_types=1);
 |
 */
 
+use App\Enums\RoleName;
 use App\Models\User;
 use Tests\TestCase;
 
@@ -31,7 +32,11 @@ pest()->extend(TestCase::class)
 |
 */
 
-function createUser(array $attributes = []): User
+function createUser(array $attributes = [], ?RoleName $role = null): User
 {
+    if (! is_null($role)) {
+        return User::factory()->role($role)->create($attributes);
+    }
+
     return User::factory()->create($attributes);
 }
