@@ -35,7 +35,7 @@ test('super admin can store new user', function (): void {
         'email' => $newUserEmail,
     ]);
 
-    $createdUser = User::where('email', $newUserEmail)->firstOrFail();
+    $createdUser = User::query()->where('email', $newUserEmail)->firstOrFail();
 
     $this->assertTrue(Hash::check('password', $createdUser->password));
 });

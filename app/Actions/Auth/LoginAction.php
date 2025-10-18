@@ -18,8 +18,6 @@ final readonly class LoginAction extends Action
      */
     public function run(LoginData $data): void
     {
-        if (! Auth::attempt($data->toArray())) {
-            throw new LoginException;
-        }
+        throw_unless(Auth::attempt($data->toArray()), LoginException::class);
     }
 }
