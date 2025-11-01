@@ -11,6 +11,7 @@ if echo "$files" | grep --quiet "\.php$"; then
         exit 1
     fi
 
+    echo "Run Rector to detect issues"
     ./vendor/bin/rector process --dry-run $files
 
     if [ $? -ne 0 ]; then
