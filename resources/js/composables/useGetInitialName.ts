@@ -1,8 +1,8 @@
 export const useGetInitialName = () => {
   const getInitialName = (name: string) => {
-    let rgx = new RegExp('(\\p{L}{1})\\p{L}+', 'gu');
+    const rgx = new RegExp('(\\p{L}{1})\\p{L}+', 'gu');
 
-    let initials = [...name.matchAll(rgx)];
+    const initials = [...name.matchAll(rgx)];
 
     return (
       (initials.shift()?.[1] || '') + (initials.pop()?.[1] || '')
