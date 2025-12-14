@@ -17,6 +17,7 @@ export default defineConfig([
     'database/',
     'routes/',
     'resources/js/components/ui',
+    'tests/',
   ]),
   {
     files: ["**/*.{js,mjs,cjs,ts,mts,cts,vue}"],
