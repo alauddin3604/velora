@@ -11,7 +11,17 @@ export default defineConfig([
     'resources/js/components/ui',
     'vendor/',
   ]),
-  { files: ["**/*.{js,mjs,cjs,ts,mts,cts,vue}"], plugins: { js }, extends: ["js/recommended"], languageOptions: { globals: globals.browser } },
+  {
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts,vue}"],
+    plugins: { js },
+    extends: ["js/recommended"],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        route: 'readonly',
+      },
+    },
+  },
   tseslint.configs.recommended,
   pluginVue.configs["flat/essential"],
   { files: ["**/*.vue"], languageOptions: { parserOptions: { parser: tseslint.parser } } },
