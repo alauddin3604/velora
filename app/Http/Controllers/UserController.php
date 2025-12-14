@@ -12,7 +12,6 @@ use App\Http\Requests\User\IndexUserRequest;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Gate;
 use Inertia\Response;
 
 final class UserController extends Controller
@@ -32,8 +31,6 @@ final class UserController extends Controller
      */
     public function create(): Response
     {
-        Gate::authorize('create', User::class);
-
         return inertia('User/Create');
     }
 
@@ -42,10 +39,20 @@ final class UserController extends Controller
      */
     public function store(StoreUserRequest $request, StoreUserAction $action): RedirectResponse
     {
-        $action->run(StoreUserData::from($request->safe()->toArray()));
+        $user = $action->run(StoreUserData::from($request->safe()->toArray()));
 
-        return to_route('users.index')
+        return to_route('users.show', $user)
             ->with('success', 'User created successfully.');
+    }
+
+    /**
+     * Display the specified user.
+     */
+    public function show(User $user): Response
+    {
+        return inertia('User/Show', [
+            'user' => $user,
+        ]);
     }
 
     /**

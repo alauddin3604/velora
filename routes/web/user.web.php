@@ -19,6 +19,10 @@ Route::middleware('auth')->group(function (): void {
         ->name('users.store')
         ->can('create', User::class);
 
+    Route::get('users/{user}', [UserController::class, 'show'])
+        ->name('users.show')
+        ->can('view', User::class);
+
     Route::delete('users/{user}', [UserController::class, 'destroy'])
         ->name('users.destroy')
         ->can('delete', User::class);
