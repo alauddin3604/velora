@@ -20,4 +20,16 @@ if echo "$files" | grep --quiet "\.php$"; then
     fi
 fi
 
+js_files=$(git diff --cached --name-only --diff-filter=AMCR)
+
+if echo "$js_files"; then
+    echo "Run ESLint..."
+    npx eslint $js_files --fix
+
+    if [ $? -ne 0 ]; then
+        echo "ESLint detected issues. Please fix the issues above and try committing again."
+        exit 1
+    fi
+fi
+
 exit 0
