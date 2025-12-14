@@ -31,8 +31,12 @@ import {
 } from '@/components/ui/sidebar'
 import { Link, router, usePage } from '@inertiajs/vue3'
 import { computed } from 'vue'
+import { useGetInitialName } from '@/composables/useGetInitialName'
 
 const page = usePage()
+const {
+  getInitialName,
+} = useGetInitialName()
 
 const user = computed(() => page.props.auth.user)
 
@@ -51,7 +55,7 @@ const logout = () => router.post(route('auth.logout'))
             <Avatar class="h-8 w-8 rounded-lg">
               <AvatarImage :src="''" :alt="user.name" />
               <AvatarFallback class="rounded-lg">
-                CN
+                {{ getInitialName(user.name) }}
               </AvatarFallback>
             </Avatar>
             <div class="grid flex-1 text-left text-sm leading-tight">
