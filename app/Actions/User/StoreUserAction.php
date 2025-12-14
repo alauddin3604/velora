@@ -14,10 +14,8 @@ final readonly class StoreUserAction extends Action
     /**
      * Execute the action.
      */
-    public function run(StoreUserData $data): void
+    public function run(StoreUserData $data): User
     {
-        DB::transaction(function () use ($data): void {
-            User::query()->create($data->toArray());
-        });
+        return DB::transaction(fn (): User => User::query()->create($data->toArray()));
     }
 }
