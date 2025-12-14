@@ -21,6 +21,7 @@ return RectorConfig::configure()
         LaravelSetList::LARAVEL_FACTORIES,
         LaravelSetList::LARAVEL_IF_HELPERS,
         LaravelSetList::LARAVEL_LEGACY_FACTORIES_TO_CLASSES,
+        LaravelSetList::LARAVEL_TYPE_DECLARATIONS,
     ])
     ->withComposerBased(laravel: true)
     ->withCache(
