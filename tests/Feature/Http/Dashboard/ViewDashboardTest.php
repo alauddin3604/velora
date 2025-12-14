@@ -16,7 +16,7 @@ it('can view dashboard if authenticated', function (): void {
         ->assertOk()
         ->assertInertia(
             fn (AssertableInertia $page): AssertableInertia => $page
-                ->component('Welcome')
+                ->component('DashboardPage')
                 ->where('auth.user.id', $user->id)
                 ->where('auth.user.name', $user->name)
                 ->where('auth.user.email', $user->email)

@@ -15,6 +15,6 @@ final class DashboardController extends Controller
      */
     public function index(): Response
     {
-        return Inertia::render('Welcome');
+        return Inertia::render('DashboardPage');
     }
 }
