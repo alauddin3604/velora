@@ -49,7 +49,6 @@ const formSubmit = form.handleSubmit((values) => {
       <CardDescription>
         Enter your email below to login to your account
       </CardDescription>
-      {{ form.values }}
     </CardHeader>
     <CardContent>
       <div class="grid gap-4">
@@ -64,7 +63,7 @@ const formSubmit = form.handleSubmit((values) => {
                 <FormMessage />
               </FormItem>
             </FormField>
-            <FormField v-slot="{ componentField }" name="password" :validate-on-model-update="form.isFieldDirty">
+            <FormField v-slot="{ componentField }" name="password" :validate-on-model-update="form.isFieldDirty('password')">
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
