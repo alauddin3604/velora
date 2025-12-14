@@ -3,13 +3,20 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 import pluginVue from "eslint-plugin-vue";
 import { defineConfig, globalIgnores } from "eslint/config";
+import { includeIgnoreFile } from "@eslint/compat";
+import { fileURLToPath } from "node:url";
+
+const gitignorePath = fileURLToPath(new URL(".gitignore", import.meta.url));
 
 export default defineConfig([
+  includeIgnoreFile(gitignorePath, 'Imported .gitignore patterns'),
   globalIgnores([
-    'node_modules/',
-    'public/',
+    'app/',
+    'bootstrap/',
+    'config/',
+    'database/',
+    'routes/',
     'resources/js/components/ui',
-    'vendor/',
   ]),
   {
     files: ["**/*.{js,mjs,cjs,ts,mts,cts,vue}"],
