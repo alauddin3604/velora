@@ -4,11 +4,9 @@ export const useGetInitialName = () => {
 
     let initials = [...name.matchAll(rgx)];
 
-    const result = (
+    return (
       (initials.shift()?.[1] || '') + (initials.pop()?.[1] || '')
     ).toUpperCase();
-
-    return result
   }
 
   return {
