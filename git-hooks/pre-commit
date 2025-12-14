@@ -24,11 +24,14 @@ js_files=$(git diff --cached --name-only --diff-filter=AMCR)
 
 if echo "$js_files"; then
     echo "Run ESLint..."
-    npx eslint $js_files --fix
+    npx eslint $js_files
 
     if [ $? -ne 0 ]; then
         echo "ESLint detected issues. Please fix the issues above and try committing again."
         exit 1
+    else
+        echo "ESLint passed."
+        echo "\n"
     fi
 fi
 
