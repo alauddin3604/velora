@@ -17,7 +17,7 @@ it('can edit profile if authenticated', function (): void {
         ->assertOk()
         ->assertInertia(
             fn (AssertableInertia $page): AssertableInertia => $page
-                ->component('Profile')
+                ->component('ProfilePage')
                 ->where('auth.user.id', $user->id)
                 ->where('auth.user.name', 'Test User')
                 ->where('auth.user.email', $user->email)

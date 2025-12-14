@@ -17,7 +17,7 @@ final class ProfileController extends Controller
      */
     public function edit(): Response
     {
-        return inertia('Profile');
+        return inertia('ProfilePage');
     }
 
     /**

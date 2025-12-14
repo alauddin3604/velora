@@ -47,3 +47,22 @@ it('cannot update profile with invalid data', function (): void {
 
     assertNotTrue($user->wasChanged('name'));
 });
+
+it('cannot update profile with invalid email', function (): void {
+    $user = createUser([
+        'email' => 'test@example.com',
+        'password' => 'password',
+    ]);
+
+    actingAs($user)
+        ->put('/profile', [
+            'name' => 'Test User',
+            'email' => 'invalid-email',
+        ])
+        ->assertRedirectBack()
+        ->assertInvalid([
+            'email' => 'The email field must be a valid email address.',
+        ]);
+
+    assertNotTrue($user->wasChanged('email'));
+});
