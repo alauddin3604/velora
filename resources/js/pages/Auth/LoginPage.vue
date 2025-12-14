@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import Auth from '@/layouts/Auth.vue'
+import AuthLayout from '@/layouts/AuthLayout.vue'
 import { Head, router } from '@inertiajs/vue3'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
@@ -11,7 +11,7 @@ import { ref } from 'vue'
 import { z } from 'zod'
 
 defineOptions({
-  layout: Auth
+  layout: AuthLayout
 })
 
 const isProcessing = ref(false)

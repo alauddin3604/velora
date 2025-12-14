@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3'
 import User from '@/types/user.type'
-import Dashboard from '@/layouts/Dashboard.vue'
+import Dashboard from '@/layouts/DashboardLayout.vue'
 
 defineProps<{
   users: User[]

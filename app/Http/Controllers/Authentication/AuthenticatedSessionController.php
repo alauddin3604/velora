@@ -20,7 +20,7 @@ final class AuthenticatedSessionController extends Controller
      */
     public function create(): Response
     {
-        return inertia('Auth/Login');
+        return inertia('Auth/LoginPage');
     }
 
     /**

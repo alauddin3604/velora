@@ -12,7 +12,7 @@ import {
 import { DashboardBreadcrumb } from '@/types/dashboard-breadcrumb'
 import { Icon } from '@iconify/vue'
 import { useColorMode } from '@vueuse/core'
-import Master from './Master.vue'
+import MasterLayout from './MasterLayout.vue'
 
 withDefaults(defineProps<{
   breadcrumbs?: DashboardBreadcrumb[]
@@ -24,7 +24,7 @@ const mode = useColorMode()
 </script>
 
 <template>
-  <Master>
+  <MasterLayout>
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
@@ -85,5 +85,5 @@ const mode = useColorMode()
         </main>
       </SidebarInset>
     </SidebarProvider>
-  </Master>
+  </MasterLayout>
 </template>

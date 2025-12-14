@@ -28,19 +28,21 @@ onMounted(() => {
 watch(
   () => page.props.flash,
   (flash) => {
-    if (flash?.error) {
+    if (!flash) return
+
+    if (flash.error) {
       toast.error(flash.error)
     }
 
-    if (flash?.info) {
+    if (flash.info) {
       toast.info(flash.info)
     }
 
-    if (flash?.success) {
+    if (flash.success) {
       toast.success(flash.success)
     }
 
-    if (flash?.warning) {
+    if (flash.warning) {
       toast.warning(flash.warning)
     } 
   },

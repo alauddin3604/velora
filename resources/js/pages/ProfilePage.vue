@@ -12,7 +12,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import Dashboard from '@/layouts/Dashboard.vue'
+import Dashboard from '@/layouts/DashboardLayout.vue'
 import { router, usePage } from '@inertiajs/vue3'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'

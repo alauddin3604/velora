@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import Master from './Master.vue'
+import MasterLayout from './MasterLayout.vue'
 </script>
 
 <template>
-  <Master>
+  <MasterLayout>
     <div class="flex h-screen w-full items-center justify-center px-4 py-8">
       <slot />
     </div>
-  </Master>
+  </MasterLayout>
 </template>
