@@ -28,7 +28,7 @@ declare module '@inertiajs/core' {
       error?: string
       info?: string
       success?: string
-      [key: string]: any
+      [key: string]: unknown
     }
     auth: {
       id: number
