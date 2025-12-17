@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/sidebar'
 import { DashboardBreadcrumb } from '@/types/dashboard-breadcrumb'
 import { Icon } from '@iconify/vue'
+import { Link } from '@inertiajs/vue3'
 import { useColorMode } from '@vueuse/core'
 import MasterLayout from './MasterLayout.vue'
 
@@ -41,7 +42,9 @@ const mode = useColorMode()
                       <BreadcrumbPage>{{ breadcrumb.label }}</BreadcrumbPage>
                     </template>
                     <template v-else>
-                      <BreadcrumbLink href="#">{{ breadcrumb.label }}</BreadcrumbLink>
+                      <BreadcrumbLink as-child>
+                        <Link :href="breadcrumb.url">{{ breadcrumb.label }}</Link>
+                      </BreadcrumbLink>
                     </template>
                   </BreadcrumbItem>
                   <BreadcrumbSeparator v-if="index < breadcrumbs.length - 1" class="hidden md:block" />
