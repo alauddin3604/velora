@@ -5,6 +5,10 @@ import { DashboardBreadcrumb } from '@/types/dashboard-breadcrumb'
 import { Head } from '@inertiajs/vue3'
 import { ref } from 'vue'
 
+defineProps<{
+  trips_count: number
+}>()
+
 const breadcrumbs = ref<DashboardBreadcrumb[]>([
   {
     label: 'Dashboard',
@@ -16,6 +20,6 @@ const breadcrumbs = ref<DashboardBreadcrumb[]>([
 <template>
   <Dashboard :breadcrumbs="breadcrumbs">
     <Head title="Home Page" />
-    <SectionCards />
+    <SectionCards :trips-count="trips_count"/>
   </Dashboard>
 </template>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { SidebarProps } from '@/components/ui/sidebar'
-
 import {
   AudioWaveform,
   BookOpen,
@@ -8,10 +7,10 @@ import {
   Command,
   Frame,
   GalleryVerticalEnd,
+  Luggage,
   Map,
   PieChart,
   Settings2,
-  SquareTerminal,
 } from 'lucide-vue-next'
 import NavMain from '@/components/NavMain.vue'
 import NavProjects from '@/components/NavProjects.vue'
@@ -64,24 +63,10 @@ const data = {
       isActive: page.url === '/',
     },
     {
-      title: 'Playground',
-      url: '#',
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: 'History',
-          url: '#',
-        },
-        {
-          title: 'Starred',
-          url: '#',
-        },
-        {
-          title: 'Settings',
-          url: '#',
-        },
-      ],
+      title: 'Trip',
+      url: route('trips.index'),
+      icon: Luggage,
+      isActive: page.url === '/trips',
     },
     {
       title: 'Models',
