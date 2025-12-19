@@ -60,9 +60,9 @@ const props = defineProps<{
               <SubmitButton :processing="processing" :clear-errors="clearErrors" label="Login" /> 
               <FieldDescription class="text-center">
                 Don't have an account?
-                <a href="#">
+                <Link href="signup">
                   Sign up
-                </a>
+                </Link>
               </FieldDescription>
             </Field>
           </FieldGroup>
