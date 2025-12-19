@@ -1,83 +1,73 @@
 <script setup lang="ts">
-import { Button } from '@/components/ui/button'
+import SubmitButton from '@/components/SubmitButton.vue'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Field, FieldDescription, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import AuthLayout from '@/layouts/AuthLayout.vue'
-import { Head, router } from '@inertiajs/vue3'
-import { toTypedSchema } from '@vee-validate/zod'
-import { useForm } from 'vee-validate'
-import { ref } from 'vue'
-import { z } from 'zod'
+import { cn } from "@/lib/utils"
+import { Form, Head } from '@inertiajs/vue3'
+import { Luggage } from 'lucide-vue-next'
+import type { HTMLAttributes } from "vue"
 
 defineOptions({
   layout: AuthLayout
 })
 
-const isProcessing = ref(false)
-
-const form = useForm({
-  validationSchema: toTypedSchema(z.object({
-    email: z.string().email(),
-    password: z.string().min(8, 'Password must be at least 8 characters.'),
-  })),
-})
-
-const formSubmit = form.handleSubmit((values) => {
-  isProcessing.value = true
-
-  router.post(route('auth.login'), values, {
-    onError: (error) => form.setErrors(error),
-    onSuccess: () => form.resetField('password'),
-    onFinish: () => {
-      form.resetField('password')
-      isProcessing.value = false
-    },
-  })
-})
+const props = defineProps<{
+  class?: HTMLAttributes["class"]
+}>()
 </script>
 
 <template>
   <Head>
     <title>Login</title>
   </Head>
-  <Card class="w-full mx-auto max-w-sm">
-    <CardHeader>
-      <CardTitle class="text-2xl">
-        Login
-      </CardTitle>
-      <CardDescription>
-        Enter your email below to login to your account
-      </CardDescription>
-    </CardHeader>
-    <CardContent>
-      <div class="grid gap-4">
-        <div class="grid gap-2">
-          <form class="space-y-6" @submit.prevent="formSubmit">
-            <FormField v-slot="{ componentField }" name="email" :validate-on-model-update="false">
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input v-bind="componentField" autocomplete="username" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            </FormField>
-            <FormField v-slot="{ componentField }" name="password" :validate-on-model-update="form.isFieldDirty('password')">
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input type="password" v-bind="componentField" autocomplete="current-password" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            </FormField>
-            <Button type="submit" class="w-full" :disabled="isProcessing">
-              Login
-            </Button>
-          </form>
-        </div>
-      </div>
-    </CardContent>
-  </Card>
+  <a href="#" class="flex items-center gap-2 self-center font-medium">
+    <div class="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
+      <Luggage class="size-4" />
+    </div>
+    Velora
+  </a>
+  <div :class="cn('flex flex-col gap-6', props.class)">
+    <Card>
+      <CardHeader class="text-center">
+        <CardTitle class="text-xl">
+          Welcome back
+        </CardTitle>
+        <CardDescription>
+          Login to Velora to manage your trips itinerary!
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Form action="login" method="POST" #default="{ processing, clearErrors }">
+          <FieldGroup>
+            <Field>
+              <FieldLabel for="email">Email</FieldLabel>
+              <Input type="email" id="email" name="email" autocomplete="username" />
+            </Field>
+            <Field>
+              <div class="flex items-center">
+                <FieldLabel for="password">
+                  Password
+                </FieldLabel>
+                <a href="#" class="ml-auto text-sm underline-offset-4 hover:underline">
+                  Forgot your password?
+                </a>
+              </div>
+              <Input id="password" type="password" name="password" autocomplete="current-password" required />
+            </Field>
+            <Field>
+              <SubmitButton :processing="processing" :clear-errors="clearErrors" label="Login" /> 
+              <FieldDescription class="text-center">
+                Don't have an account?
+                <a href="#">
+                  Sign up
+                </a>
+              </FieldDescription>
+            </Field>
+          </FieldGroup>
+        </Form>
+      </CardContent>
+    </Card>
+  </div>
 </template>

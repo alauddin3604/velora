@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { Toaster } from '@/components/ui/sonner'
 import { usePage } from '@inertiajs/vue3'
+import { useColorMode } from '@vueuse/core'
 import { onMounted, watch } from 'vue'
 import { toast } from 'vue-sonner'
 import 'vue-sonner/style.css'
 
 const page = usePage()
+useColorMode()
 
 onMounted(() => {
   if (page.props.flash?.error) {
