@@ -5,7 +5,7 @@ import { Field, FieldDescription, FieldGroup, FieldLabel } from '@/components/ui
 import { Input } from '@/components/ui/input'
 import AuthLayout from '@/layouts/AuthLayout.vue'
 import { cn } from "@/lib/utils"
-import { Form, Head } from '@inertiajs/vue3'
+import { Form, Head, Link } from '@inertiajs/vue3'
 import { Luggage } from 'lucide-vue-next'
 import type { HTMLAttributes } from "vue"
 
@@ -50,9 +50,9 @@ const props = defineProps<{
                 <FieldLabel for="password">
                   Password
                 </FieldLabel>
-                <a href="#" class="ml-auto text-sm underline-offset-4 hover:underline">
+                <Link href="forgot-password" class="ml-auto text-sm underline-offset-4 hover:underline">
                   Forgot your password?
-                </a>
+                </Link>
               </div>
               <Input id="password" type="password" name="password" autocomplete="current-password" required />
             </Field>
