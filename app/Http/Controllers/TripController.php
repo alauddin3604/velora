@@ -13,6 +13,8 @@ use App\Http\Requests\Trip\StoreTripRequest;
 use App\Http\Resources\TripResource;
 use App\Models\Trip;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Inertia\Inertia;
 use Inertia\Response;
 
 class TripController extends Controller
@@ -22,7 +24,7 @@ class TripController extends Controller
         $data = GetTripListData::fromGetTripListRequest($request);
 
         return inertia('Trip/IndexPage', [
-            'trips' => TripResource::collection($action->handle($data)),
+            'trips' => Inertia::defer(fn (): JsonResource => TripResource::collection($action->handle($data))),
             'search' => $data->search,
         ]);
     }

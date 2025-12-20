@@ -15,6 +15,7 @@ import {
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 
 const props = defineProps<{
+  type: 'row' | 'item'
   paginated: Paginated<unknown>
 }>()
 
@@ -44,7 +45,7 @@ const changePage = (page: number) => {
   <div class="w-full flex items-center justify-between">
     <div class="w-1/3 flex items-center justify-start gap-2">
       <div>
-        <p class="text-sm text-muted-foreground">Rows per page</p>
+        <p class="text-sm text-muted-foreground"><span class="capitalize">{{ type }}</span>s per page</p>
       </div>
       <Select v-model:model-value="perPage" @update:model-value="changePerPage">
         <SelectTrigger class="w-[90px]">
