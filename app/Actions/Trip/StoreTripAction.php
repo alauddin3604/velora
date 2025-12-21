@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 final readonly class StoreTripAction extends Action
 {
-    public function handle(StoreTripData $data): void
+    public function run(StoreTripData $data): void
     {
         $user = Auth::user();
 
