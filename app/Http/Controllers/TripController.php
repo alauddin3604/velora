@@ -41,7 +41,7 @@ class TripController extends Controller
 
     public function store(StoreTripRequest $request, StoreTripAction $action): RedirectResponse
     {
-        $action->run(StoreTripData::fromStoreTripRequest($request));
+        $action->run($request->user(), StoreTripData::fromStoreTripRequest($request));
 
         return to_route('trips.index')->with('success', 'Trip created successfully');
     }
