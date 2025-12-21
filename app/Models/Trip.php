@@ -8,6 +8,7 @@ use App\Enums\TripStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 final class Trip extends Model
 {
@@ -34,6 +35,18 @@ final class Trip extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the users that are collaborating on the trip.
+     *
+     * @return BelongsToMany<User, $this>
+     */
+    public function users(): BelongsToMany
+    {
+        return $this
+            ->belongsToMany(User::class, 'trip_user')
+            ->withPivot(['role', 'is_accepted']);
     }
 
     /**

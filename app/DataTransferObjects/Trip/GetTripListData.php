@@ -12,6 +12,7 @@ final class GetTripListData extends Data
     public function __construct(
         public readonly ?string $search,
         public readonly ?string $status,
+        public readonly ?bool $isInvited,
         public readonly ?int $perPage,
     ) {}
 
@@ -20,6 +21,7 @@ final class GetTripListData extends Data
         return new self(
             search: $request->input('search'),
             status: $request->input('status'),
+            isInvited: $request->boolean('is_invited'),
             perPage: $request->integer('perPage'),
         );
     }

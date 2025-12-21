@@ -4,14 +4,16 @@ import NavPagination from '@/components/NavPagination.vue'
 import Button from '@/components/ui/button/Button.vue'
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty'
 import { Input } from '@/components/ui/input'
-import { Item, ItemContent, ItemDescription, ItemGroup, ItemHeader, ItemTitle } from '@/components/ui/item'
+import { Item, ItemContent, ItemDescription, ItemFooter, ItemGroup, ItemHeader, ItemTitle } from '@/components/ui/item'
+import { Label } from '@/components/ui/label'
+import { Switch } from '@/components/ui/switch'
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import { DashboardBreadcrumb } from '@/types/dashboard-breadcrumb'
 import { Paginated } from '@/types/paginated.type'
 import { Trip } from '@/types/trip.type'
 import { Deferred, Form, Head, Link, router } from '@inertiajs/vue3'
-import { Luggage, Plus } from 'lucide-vue-next'
-import { ref } from 'vue'
+import { Check, Luggage, Plus } from 'lucide-vue-next'
+import { ref, watch } from 'vue'
 
 const props = defineProps<{
   trips: Paginated<Trip>
@@ -26,6 +28,15 @@ const breadcrumbs = ref<DashboardBreadcrumb[]>([
 ])
 
 const search = ref(props.search)
+
+const showInvitedTrips = ref(false)
+
+watch(showInvitedTrips, () => {
+  router.visit(route('trips.index', { is_invited: showInvitedTrips.value }), {
+    only: ['trips'],
+    preserveState: true
+  })
+})
 
 </script>
 
@@ -42,9 +53,15 @@ const search = ref(props.search)
           </Button>
         </Form>
       </div>
-      <Button as-child>
-        <Link :href="route('trips.create')">Create a Trip</Link>
-      </Button>
+      <div class="flex gap-3">
+        <div class="flex items-center space-x-2">
+          <Switch id="invited-trips" v-model="showInvitedTrips" />
+          <Label for="invited-trips">Invited Trips</Label>
+        </div>
+        <Button as-child>
+          <Link :href="route('trips.create')">Create a Trip</Link>
+        </Button>
+      </div>
     </div>
     <Deferred data="trips">
       <template #fallback>
@@ -86,6 +103,11 @@ const search = ref(props.search)
                   <ItemTitle>{{ trip.title }}</ItemTitle>
                   <ItemDescription>{{ trip.description }}</ItemDescription>
                 </ItemContent>
+                <ItemFooter>
+                  <Button size="icon-sm">
+                    <Check class="size-4" />
+                  </Button>
+                </ItemFooter>
               </a>
             </Item>
           </ItemGroup>

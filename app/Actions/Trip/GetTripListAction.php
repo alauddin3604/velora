@@ -7,6 +7,7 @@ namespace App\Actions\Trip;
 use App\Actions\Action;
 use App\DataTransferObjects\Trip\GetTripListData;
 use App\Models\Trip;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,8 +20,17 @@ final readonly class GetTripListAction extends Action
     {
         return Trip::query()
             ->where('user_id', Auth::id())
-            ->when($data->status, fn ($query) => $query->where('status', $data->status))
-            ->when($data->search, fn ($query) => $query->where('title', 'like', '%'.$data->search.'%'))
+            ->orWhereHas('users', function (Builder $query) use ($data): void {
+                $query
+                    ->where('user_id', Auth::id())
+                    ->when($data->isInvited, function ($query): void {
+                        $query->where('is_accepted', false);
+                    }, function ($query): void {
+                        $query->where('is_accepted');
+                    });
+            })
+            ->when($data->status, fn (Builder $query): Builder => $query->where('status', $data->status))
+            ->when($data->search, fn (Builder $query): Builder => $query->where('title', 'like', '%'.$data->search.'%'))
             ->paginate($data->perPage)
             ->withQueryString();
     }

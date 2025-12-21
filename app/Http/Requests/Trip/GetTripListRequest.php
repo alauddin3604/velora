@@ -28,6 +28,7 @@ class GetTripListRequest extends FormRequest
         return [
             'search' => ['nullable', 'string'],
             'status' => ['nullable', 'string', Rule::enum(TripStatus::class)],
+            'is_invited' => ['nullable', 'boolean'],
         ];
     }
 

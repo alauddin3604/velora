@@ -12,8 +12,10 @@ use App\Http\Requests\Trip\GetTripListRequest;
 use App\Http\Requests\Trip\StoreTripRequest;
 use App\Http\Resources\TripResource;
 use App\Models\Trip;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -48,6 +50,12 @@ class TripController extends Controller
     {
         return inertia('Trip/ShowPage', [
             'trip' => TripResource::make($trip),
+            'users' => Inertia::optional(fn () => request()->filled('search_user')
+                ? User::query()
+                    ->whereNot('id', Auth::id())
+                    ->where('name', 'like', '%'.request('search_user').'%')
+                    ->get()
+                : collect()),
         ]);
     }
 }
