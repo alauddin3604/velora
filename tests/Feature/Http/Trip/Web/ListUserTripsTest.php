@@ -30,8 +30,11 @@ it('can get trip list', function (): void {
 it('can get invited trip list', function (): void {
     $user = createUser();
 
+    /** @var Trip */
     $trip = Trip::factory()->create();
-    $trip->users()->attach($user);
+    $trip->users()->attach($user, [
+        'is_accepted' => true,
+    ]);
 
     actingAs($user);
 
