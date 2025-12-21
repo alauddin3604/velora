@@ -5,18 +5,21 @@ declare(strict_types=1);
 namespace App\Actions\Trip;
 
 use App\Actions\Action;
-use App\DataTransferObjects\Trip\GetTripListData;
+use App\DataTransferObjects\Trip\ListUserTripsData;
 use App\Models\Trip;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 
-final readonly class GetTripListAction extends Action
+final readonly class ListUserTripsAction extends Action
 {
     /**
      * Handle the action.
+     *
+     * @param   ListUserTripsData     $data  The data for filtering and paginating trips
+     * @return LengthAwarePaginator The paginated list of trips
      */
-    public function handle(GetTripListData $data): LengthAwarePaginator
+    public function handle(ListUserTripsData $data): LengthAwarePaginator
     {
         return Trip::query()
             ->where('user_id', Auth::id())

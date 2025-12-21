@@ -8,7 +8,7 @@ use App\Enums\TripStatus;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class GetTripListRequest extends FormRequest
+class ListUserTripsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

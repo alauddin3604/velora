@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\DataTransferObjects\Trip;
 
-use App\Http\Requests\Trip\GetTripListRequest;
+use App\Http\Requests\Trip\ListUserTripsRequest;
 use Spatie\LaravelData\Data;
 
-final class GetTripListData extends Data
+final class ListUserTripsData extends Data
 {
     public function __construct(
         public readonly ?string $search,
@@ -16,7 +16,7 @@ final class GetTripListData extends Data
         public readonly ?int $perPage,
     ) {}
 
-    public static function fromGetTripListRequest(GetTripListRequest $request): self
+    public static function fromGetTripListRequest(ListUserTripsRequest $request): self
     {
         return new self(
             search: $request->input('search'),

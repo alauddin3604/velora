@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Actions\Trip\GetTripListAction;
+use App\Actions\Trip\ListUserTripsAction;
 use App\Actions\Trip\StoreTripAction;
-use App\DataTransferObjects\Trip\GetTripListData;
+use App\DataTransferObjects\Trip\ListUserTripsData;
 use App\DataTransferObjects\Trip\StoreTripData;
-use App\Http\Requests\Trip\GetTripListRequest;
+use App\Http\Requests\Trip\ListUserTripsRequest;
 use App\Http\Requests\Trip\StoreTripRequest;
 use App\Http\Resources\TripResource;
 use App\Models\Trip;
@@ -21,9 +21,12 @@ use Inertia\Response;
 
 class TripController extends Controller
 {
-    public function index(GetTripListRequest $request, GetTripListAction $action): Response
+    /**
+     * Display a listing of the trips.
+     */
+    public function index(ListUserTripsRequest $request, ListUserTripsAction $action): Response
     {
-        $data = GetTripListData::fromGetTripListRequest($request);
+        $data = ListUserTripsData::fromGetTripListRequest($request);
 
         return inertia('Trip/IndexPage', [
             'trips' => Inertia::defer(fn (): JsonResource => TripResource::collection($action->handle($data))),
