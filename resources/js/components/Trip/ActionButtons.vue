@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Trip from '@/types/trip.type'
+import { Trip } from '@/types/trip.type'
 import { Button } from '../ui/button'
 import { Eye, Pencil } from 'lucide-vue-next'
 import { Link } from '@inertiajs/vue3'
