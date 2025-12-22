@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Trip;
 
 use App\Actions\Trip\ListUserTripsAction;
 use App\Actions\Trip\StoreTripAction;
 use App\DataTransferObjects\Trip\ListUserTripsData;
 use App\DataTransferObjects\Trip\StoreTripData;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Trip\ListUserTripsRequest;
 use App\Http\Requests\Trip\StoreTripRequest;
 use App\Http\Resources\TripResource;

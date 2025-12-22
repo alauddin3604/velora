@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\TripController;
-use App\Http\Controllers\TripUserController;
+use App\Http\Controllers\Trip\TripController;
+use App\Http\Controllers\Trip\TripUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function (): void {
