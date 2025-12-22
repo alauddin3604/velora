@@ -4,30 +4,21 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Web\Trip;
 
+use App\Actions\Trip\StoreTripUserAction;
+use App\DataTransferObjects\Trip\StoreTripUserData;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Trip\StoreTripUserRequest;
 use App\Models\Trip;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 final class TripUserController extends Controller
 {
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Trip $trip): RedirectResponse
+    public function store(StoreTripUserRequest $request, StoreTripUserAction $action, Trip $trip): RedirectResponse
     {
-        // TODO: refactor this
-        $request->validate([
-            'user_ids' => [
-                'required',
-                'array',
-                'min:1',
-            ],
-            'user_ids.*' => ['exists:users,id'],
-            'role' => ['required', 'in:viewer,editor'],
-        ]);
-
-        $trip->users()->attach($request->user_ids, ['role' => $request->role]);
+        $action->run($trip, StoreTripUserData::from($request->safe()->toArray()));
 
         return to_route('trips.show', $trip)->with('success', 'Invite sent successfully.');
     }

@@ -11,7 +11,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('trip_user', function (Blueprint $table): void {
-            $table->boolean('is_accepted')->default(false)->after('role');
+            $table->boolean('is_accepted')->nullable()->after('role');
         });
     }
 
