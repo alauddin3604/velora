@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Authentication;
+namespace App\Http\Controllers\Web\Authentication;
 
 use App\Actions\Auth\LoginAction;
 use App\Actions\Auth\LogoutAction;

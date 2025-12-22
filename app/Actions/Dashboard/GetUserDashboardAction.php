@@ -9,6 +9,9 @@ use App\Models\User;
 
 final readonly class GetUserDashboardAction extends Action
 {
+    /**
+     * Get the user dashboard.
+     */
     public function run(User $user): array
     {
         return [

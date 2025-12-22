@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Trip;
+namespace App\Http\Controllers\Web\Trip;
 
 use App\Actions\Trip\ListUserTripsAction;
 use App\Actions\Trip\StoreTripAction;
@@ -27,10 +27,10 @@ class TripController extends Controller
      */
     public function index(ListUserTripsRequest $request, ListUserTripsAction $action): Response
     {
-        $data = ListUserTripsData::fromGetTripListRequest($request);
+        $data = ListUserTripsData::from($request->safe()->toArray());
 
         return inertia('Trip/IndexPage', [
-            'trips' => Inertia::defer(fn (): JsonResource => TripResource::collection($action->handle($data))),
+            'trips' => Inertia::defer(fn (): JsonResource => TripResource::collection($action->run($data))),
             'search' => $data->search,
         ]);
     }
@@ -43,13 +43,26 @@ class TripController extends Controller
         return inertia('Trip/CreatePage');
     }
 
+    /**
+     * Store a newly created trip in storage.
+     */
     public function store(StoreTripRequest $request, StoreTripAction $action): RedirectResponse
     {
-        $action->run($request->user(), StoreTripData::fromStoreTripRequest($request));
+        $action->run(
+            user: $request->user(),
+            data: StoreTripData::from([
+                'title' => $request->safe()->input('title'),
+                'start_date' => $request->safe()->date('start_date'),
+                'end_date' => $request->safe()->date('end_date'),
+            ])
+        );
 
         return to_route('trips.index')->with('success', 'Trip created successfully');
     }
 
+    /**
+     * Display the specified trip.
+     */
     public function show(Trip $trip): Response
     {
         return inertia('Trip/ShowPage', [

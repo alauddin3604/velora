@@ -12,7 +12,7 @@ it('can view login page', function (): void {
         ->assertOk()
         ->assertInertia(
             fn (AssertableInertia $page): AssertableInertia => $page
-                ->component('Auth/Login')
+                ->component('Auth/LoginPage')
         );
 });
 

@@ -32,6 +32,9 @@ class ListUserTripsRequest extends FormRequest
         ];
     }
 
+    /**
+     * Prepare the data for validation.
+     */
     protected function prepareForValidation()
     {
         $this->mergeIfMissing([

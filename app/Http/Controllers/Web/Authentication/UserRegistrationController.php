@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Authentication;
+namespace App\Http\Controllers\Web\Authentication;
 
 use App\Actions\Auth\SignupAction;
 use App\DataTransferObjects\SignupData;
@@ -13,11 +13,17 @@ use Inertia\Response;
 
 final class UserRegistrationController extends Controller
 {
+    /**
+     * Display the registration view.
+     */
     public function create(): Response
     {
         return inertia('Auth/SignupPage');
     }
 
+    /**
+     * Handle a registration request for the application.
+     */
     public function store(SignupRequest $request, SignupAction $action): RedirectResponse
     {
         $action->run(SignupData::from($request->validated()));

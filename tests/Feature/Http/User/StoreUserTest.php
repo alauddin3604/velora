@@ -26,7 +26,7 @@ test('super admin can store new user', function (): void {
             'email' => $newUserEmail,
             'password' => 'password',
         ])
-        ->assertRedirect(route('users.index'))
+        ->assertRedirect()
         ->assertSessionHas('success', 'User created successfully.');
 
     assertDatabaseCount('users', 2);

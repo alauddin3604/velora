@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Authentication;
+namespace App\Http\Controllers\Web\Authentication;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ResetPasswordRequest;
@@ -15,6 +15,9 @@ use Inertia\Response;
 
 final class ResetPasswordController extends Controller
 {
+    /**
+     * Display the password reset view.
+     */
     public function create(string $token): Response
     {
         return inertia('Auth/ResetPasswordPage', [
@@ -22,6 +25,9 @@ final class ResetPasswordController extends Controller
         ]);
     }
 
+    /**
+     * Reset the given user's password.
+     */
     public function store(ResetPasswordRequest $request): RedirectResponse
     {
         $status = Password::reset(

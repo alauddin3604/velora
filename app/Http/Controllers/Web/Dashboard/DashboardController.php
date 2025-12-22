@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Web\Dashboard;
 
 use App\Actions\Dashboard\GetUserDashboardAction;
 use App\Http\Controllers\Controller;

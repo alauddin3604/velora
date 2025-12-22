@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\Authentication\AuthenticatedSessionController;
-use App\Http\Controllers\Authentication\ForgotPasswordController;
-use App\Http\Controllers\Authentication\ResetPasswordController;
-use App\Http\Controllers\Authentication\UserRegistrationController;
+use App\Http\Controllers\Web\Authentication\AuthenticatedSessionController;
+use App\Http\Controllers\Web\Authentication\ForgotPasswordController;
+use App\Http\Controllers\Web\Authentication\ResetPasswordController;
+use App\Http\Controllers\Web\Authentication\UserRegistrationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login')->middleware('guest');

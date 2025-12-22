@@ -19,7 +19,7 @@ final readonly class ListUserTripsAction extends Action
      * @param   ListUserTripsData     $data  The data for filtering and paginating trips
      * @return LengthAwarePaginator The paginated list of trips
      */
-    public function handle(ListUserTripsData $data): LengthAwarePaginator
+    public function run(ListUserTripsData $data): LengthAwarePaginator
     {
         return Trip::query()
             ->where('user_id', Auth::id())
@@ -29,7 +29,7 @@ final readonly class ListUserTripsAction extends Action
                     ->when($data->isInvited, function ($query): void {
                         $query->where('is_accepted', false);
                     }, function ($query): void {
-                        $query->where('is_accepted');
+                        $query->where('is_accepted', true);
                     });
             })
             ->when($data->status, fn (Builder $query): Builder => $query->where('status', $data->status))

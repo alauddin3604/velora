@@ -2,15 +2,19 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Trip;
+namespace App\Http\Controllers\Web\Trip;
 
 use App\Http\Controllers\Controller;
 use App\Models\Trip;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 final class TripUserController extends Controller
 {
-    public function store(Request $request, Trip $trip)
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request, Trip $trip): RedirectResponse
     {
         // TODO: refactor this
         $request->validate([

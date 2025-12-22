@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
 use App\Actions\User\GetAllUserAction;
 use App\Actions\User\StoreUserAction;
 use App\DataTransferObjects\StoreUserData;
 use App\DataTransferObjects\UserQueryData;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\User\IndexUserRequest;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Models\User;
@@ -21,7 +22,7 @@ final class UserController extends Controller
      */
     public function index(IndexUserRequest $request, GetAllUserAction $action): Response
     {
-        return inertia('User/Index', [
+        return inertia('User/IndexPage', [
             'users' => $action->run(UserQueryData::from($request->safe()->toArray())),
         ]);
     }

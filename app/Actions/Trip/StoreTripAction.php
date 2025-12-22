@@ -11,6 +11,9 @@ use App\Models\User;
 
 final readonly class StoreTripAction extends Action
 {
+    /**
+     * Store a new trip for the given user.
+     */
     public function run(User $user, StoreTripData $data): void
     {
         $user->trips()->create([

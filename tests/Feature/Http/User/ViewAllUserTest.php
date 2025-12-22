@@ -24,7 +24,7 @@ test('super admin can view all users', function (): void {
         ->assertOk()
         ->assertInertia(
             fn (AssertableInertia $page): AssertableInertia => $page
-                ->component('User/Index')
+                ->component('User/IndexPage')
                 ->has('users', 4)
                 ->where('users.0.id', $user->id)
                 ->where('users.0.name', $user->name)
