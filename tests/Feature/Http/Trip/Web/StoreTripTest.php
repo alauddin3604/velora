@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Illuminate\Support\Facades\Date;
+
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\from;
@@ -11,8 +13,10 @@ it('can store a trip', function (): void {
 
     actingAs($user);
 
-    $startDate = now()->addDay()->format('Y-m-d');
-    $endDate = now()->addDays(7)->format('Y-m-d');
+    $currentDate = Date::now();
+
+    $startDate = $currentDate->addDays(7)->format('Y-m-d');
+    $endDate = $currentDate->addDays(14)->format('Y-m-d');
 
     $response = from(route('trips.create'))->post(route('trips.store'), [
         'title' => 'Test Trip',
