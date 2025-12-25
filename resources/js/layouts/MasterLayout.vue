@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { Toaster } from '@/components/ui/sonner'
+import { PageProps } from '@/types/inertia-props.type'
 import { usePage } from '@inertiajs/vue3'
 import { useColorMode } from '@vueuse/core'
 import { onMounted, watch } from 'vue'
 import { toast } from 'vue-sonner'
 import 'vue-sonner/style.css'
 
-const page = usePage()
+const page = usePage<PageProps>()
 useColorMode()
 
 onMounted(() => {

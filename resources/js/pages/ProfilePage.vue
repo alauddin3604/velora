@@ -13,13 +13,14 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import Dashboard from '@/layouts/DashboardLayout.vue'
+import { PageProps } from '@/types/inertia-props.type'
 import { router, usePage } from '@inertiajs/vue3'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import { ref } from 'vue'
 import z from 'zod'
 
-const user = usePage().props.auth.user
+const user = usePage<PageProps>().props.auth.user
 
 const breadcrumbs = ref([
   {
