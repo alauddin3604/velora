@@ -12,7 +12,7 @@ defineProps<{
 <template>
   <div class="flex gap-2">
     <Button variant="default" as-child>
-      <Link :href="route('trips.show', trip)">
+      <Link :href="route('trips.show', trip.id)">
         <Eye />
       </Link>
     </Button>
