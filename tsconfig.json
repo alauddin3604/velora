@@ -16,6 +16,7 @@
             "node"
         ],
         "paths": {
+            "ziggy-js": ["./vendor/tightenco/ziggy"],
             "@/*": ["./resources/js/*"]
         }
     },

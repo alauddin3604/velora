@@ -1,9 +1,15 @@
 import { defineConfig } from 'vite'
 import laravel from 'laravel-vite-plugin'
+import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
+    resolve: {
+        alias: {
+            'ziggy-js': path.resolve(__dirname, 'vendor/tightenco/ziggy'),
+        },
+    },
     plugins: [
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.ts'],
