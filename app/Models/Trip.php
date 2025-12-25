@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 final class Trip extends Model
 {
@@ -47,6 +48,16 @@ final class Trip extends Model
         return $this
             ->belongsToMany(User::class, 'trip_user')
             ->withPivot(['role', 'is_accepted']);
+    }
+
+    /**
+     * Get the itineraries for the trip.
+     *
+     * @return HasMany<Itinerary, $this>
+     */
+    public function itineraries(): HasMany
+    {
+        return $this->hasMany(Itinerary::class);
     }
 
     /**

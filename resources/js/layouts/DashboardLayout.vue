@@ -9,17 +9,15 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from '@/components/ui/sidebar'
-import { DashboardBreadcrumb } from '@/types/dashboard-breadcrumb'
 import { Icon } from '@iconify/vue'
-import { Link } from '@inertiajs/vue3'
+import { Link, usePage } from '@inertiajs/vue3'
 import { useColorMode } from '@vueuse/core'
 import MasterLayout from './MasterLayout.vue'
+import { PageProps } from '@/types/inertia-props.type'
 
-withDefaults(defineProps<{
-  breadcrumbs?: DashboardBreadcrumb[]
-}>(), {
-  breadcrumbs: () => []
-})
+const page = usePage<PageProps>()
+
+const breadcrumbs = page.props.breadcrumbs
 
 const mode = useColorMode()
 </script>
@@ -29,8 +27,7 @@ const mode = useColorMode()
     <SidebarProvider>
       <AppSidebar variant="inset" />
       <SidebarInset>
-        <header
-          class="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+        <header class="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
           <div class="flex items-center gap-2 px-4">
             <SidebarTrigger class="-ml-1" />
             <Separator orientation="vertical" class="mr-2 h-4" />

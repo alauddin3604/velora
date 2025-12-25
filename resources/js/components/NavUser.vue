@@ -5,10 +5,8 @@ import {
   ChevronsUpDown,
   CreditCard,
   LogOut,
-  Sparkles,
-  User,
+  User
 } from 'lucide-vue-next'
-
 import {
   Avatar,
   AvatarFallback,
@@ -29,11 +27,12 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar'
+import { useGetInitialName } from '@/composables/useGetInitialName'
+import { PageProps } from '@/types/inertia-props.type'
 import { Link, router, usePage } from '@inertiajs/vue3'
 import { computed } from 'vue'
-import { useGetInitialName } from '@/composables/useGetInitialName'
 
-const page = usePage()
+const page = usePage<PageProps>()
 const {
   getInitialName,
 } = useGetInitialName()

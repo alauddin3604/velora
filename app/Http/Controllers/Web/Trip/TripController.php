@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Web\Trip;
 
+use App\Actions\Trip\GetTripAction;
 use App\Actions\Trip\ListUserTripsAction;
 use App\Actions\Trip\StoreTripAction;
 use App\DataTransferObjects\Trip\ListUserTripsData;
@@ -63,10 +64,10 @@ class TripController extends Controller
     /**
      * Display the specified trip.
      */
-    public function show(Trip $trip): Response
+    public function show(GetTripAction $action, Trip $trip): Response
     {
         return inertia('Trip/ShowPage', [
-            'trip' => TripResource::make($trip),
+            'trip' => TripResource::make($action->run($trip)),
             'users' => Inertia::optional(fn () => request()->filled('search_user')
                 ? User::query()
                     ->whereNot('id', Auth::id())

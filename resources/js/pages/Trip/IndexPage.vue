@@ -68,7 +68,7 @@ watch(showInvitedTrips, () => {
         <LoadingContent />
       </template>
       <template v-if="trips.data.length === 0">
-        <Empty class="from-muted/50 to-background h-full bg-gradient-to-b from-30%">
+        <Empty class="from-muted/50 to-background h-full bg-linear-to-b from-30%">
           <EmptyHeader>
             <EmptyMedia variant="icon">
               <Luggage />
