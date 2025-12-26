@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Actions\Auth;
 
+use App\Enums\SocialiteProvider;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,15 +16,15 @@ final readonly class HandleSocialLoginAction
     /**
      * Execute the action.
      */
-    public function run(string $provider): void
+    public function run(SocialiteProvider $provider): void
     {
         DB::transaction(function () use ($provider): void {
-            $social = Socialite::driver($provider)->user();
+            $social = Socialite::driver($provider->value)->user();
 
             $user = User::query()
                 ->updateOrCreate([
                     'socialite_id' => $social->getId(),
-                    'provider' => $provider,
+                    'provider' => $provider->value,
                     'email' => $social->getEmail(),
                 ], [
                     'name' => $social->getName(),
