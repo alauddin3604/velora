@@ -16,6 +16,18 @@ declare module 'ziggy-js' {
         }
     ],
     "password.update": [],
+    "auth.social.redirect": [
+        {
+            "name": "provider",
+            "required": true
+        }
+    ],
+    "auth.social.callback": [
+        {
+            "name": "provider",
+            "required": true
+        }
+    ],
     "users.index": [],
     "users.create": [],
     "users.store": [],

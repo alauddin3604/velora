@@ -52,7 +52,7 @@ final class HandleInertiaRequests extends Middleware
             'auth' => [
                 'id' => fn () => $request->user() ? $request->user()->id : null,
                 'user' => fn () => $request->user()
-                    ? $request->user()->only('id', 'name', 'email')
+                    ? $request->user()->only('id', 'name', 'email', 'avatar')
                     : null,
             ],
             'breadcrumbs' => $this->constructBreadcrumbs($request),
