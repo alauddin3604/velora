@@ -26,6 +26,6 @@ class SocialController extends Controller
     {
         $action->run($provider);
 
-        return to_route('dashboard');
+        return to_route('dashboard')->with('success', 'You have been logged in successfully.');
     }
 }
