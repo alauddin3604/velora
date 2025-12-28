@@ -18,6 +18,7 @@ export default defineConfig([
     'database/',
     'routes/',
     'resources/js/components/ui',
+    'resources/js/ziggy.js',
     'tests/',
   ]),
   {
