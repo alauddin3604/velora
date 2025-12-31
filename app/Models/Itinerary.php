@@ -28,6 +28,7 @@ final class Itinerary extends Model
         'day_number',
         'order',
         'type',
+        'budget_estimation',
     ];
 
     /**

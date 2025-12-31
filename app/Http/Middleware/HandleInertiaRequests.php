@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Inertia\Middleware;
 use Override;
 
@@ -55,57 +54,6 @@ final class HandleInertiaRequests extends Middleware
                     ? $request->user()->only('id', 'name', 'email', 'avatar')
                     : null,
             ],
-            'breadcrumbs' => $this->constructBreadcrumbs($request),
         ];
-    }
-
-    /**
-     * Construct a breadcrumb's page based on path
-     */
-    private function constructBreadcrumbs(Request $request): array
-    {
-        $path = $request->path();
-
-        if ($path === '/') {
-            return [];
-        }
-
-        $segments = explode('/', mb_trim($path, '/'));
-        $breadcrumbs = [];
-        $url = '';
-
-        foreach ($segments as $index => $segment) {
-            $url .= '/'.$segment;
-
-            $isLast = $index === count($segments) - 1;
-            $previousSegment = $index > 0 ? $segments[$index - 1] : null;
-
-            $breadcrumbs[] = [
-                'label' => $this->formatSegmentLabel($segment, $previousSegment),
-                'url' => $isLast ? null : $url,
-            ];
-        }
-
-        return $breadcrumbs;
-    }
-
-    /**
-     * Format the segment.
-     */
-    private function formatSegmentLabel(string $segment, ?string $previousSegment = null): string
-    {
-        if (is_numeric($segment)) {
-            return 'Details';
-        }
-
-        if ($segment === 'edit' && is_numeric($previousSegment)) {
-            return 'Edit';
-        }
-
-        return Str::of($segment)
-            ->replace('-', ' ')
-            ->replace('_', ' ')
-            ->title()
-            ->toString();
     }
 }

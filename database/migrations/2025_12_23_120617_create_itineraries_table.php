@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedInteger('day_number')->nullable();
             $table->unsignedSmallInteger('order')->nullable();
             $table->string('type')->index();
+            $table->unsignedInteger('budget_estimation')->nullable();
             $table->timestamps();
         });
     }

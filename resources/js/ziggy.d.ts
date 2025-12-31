@@ -57,6 +57,20 @@ declare module 'ziggy-js' {
             "binding": "id"
         }
     ],
+    "trips.itineraries.create": [
+        {
+            "name": "trip",
+            "required": true,
+            "binding": "id"
+        }
+    ],
+    "trips.itineraries.store": [
+        {
+            "name": "trip",
+            "required": true,
+            "binding": "id"
+        }
+    ],
     "trips.users.store": [
         {
             "name": "trip",
