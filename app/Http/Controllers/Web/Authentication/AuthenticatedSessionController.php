@@ -30,7 +30,7 @@ final class AuthenticatedSessionController extends Controller
     {
         $action->run(LoginData::from($request->safe()->toArray()));
 
-        return to_route('dashboard')->with('info', 'You have been logged in.');
+        return to_route('home')->with('info', 'You have been logged in.');
     }
 
     /**
