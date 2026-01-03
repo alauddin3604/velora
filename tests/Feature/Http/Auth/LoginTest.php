@@ -21,7 +21,7 @@ it('can login', function (): void {
         'email' => 'test@example.com',
         'password' => 'password',
     ])
-        ->assertRedirect(route('dashboard'));
+        ->assertRedirect('home');
 
     assertAuthenticatedAs($user);
     assertEquals($user->id, Auth::id(), 'Auth::id() should return the authenticated user ID.');
