@@ -19,7 +19,7 @@ if [ -n "$php_files" ]; then
 fi
 
 # Get all staged files for ESLint
-js_files=$(git diff --cached --name-only --diff-filter=AMCR)
+js_files=$(git diff --cached --name-only --diff-filter=AMCR | grep -E "\.(js|ts|jsx|tsx|vue)$")
 
 # Run ESLint if there are files to check
 if [ -n "$js_files" ]; then
