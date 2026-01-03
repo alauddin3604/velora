@@ -4,7 +4,6 @@ config:
   webroot: public
   via: nginx
   php: "8.5"
-  composer_version: 2.8.9
   cache: redis
 services:
   node:
