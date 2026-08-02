@@ -1,6 +1,7 @@
 name: velora
 recipe: laravel
 config:
+  database: postgres
   webroot: public
   via: nginx
   php: "8.5"
@@ -17,12 +18,9 @@ services:
     ports:
       - 5173:5173
   database:
-    type: mysql
     creds:
-      user: velora
-      password: velora
       database: velora
-    portforward: 3307
+    portforward: 5454
 tooling:
   dev:
     service: node
