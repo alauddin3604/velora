@@ -25,6 +25,9 @@ tooling:
   dev:
     service: node
     cmd: pnpm dev
+  pnpm:
+    service: node
+    cmd: pnpm
 excludes:
   - node_modules
   - vendor
