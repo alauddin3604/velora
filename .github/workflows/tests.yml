@@ -21,6 +21,12 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.5'
+        tools: composer:v2
+
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
 
@@ -43,14 +49,19 @@ jobs:
         cp .env.example .env
         php artisan key:generate
 
-    - name: Cache node_modules dependencies
-      uses: actions/cache@v3
+    - name: Set up pnpm
+      uses: pnpm/action-setup@v4
       with:
-        path: ./node_modules
-        key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
+        version: 10
 
-    - name: Install node_modules dependencies
-      run: npm install && npm run build
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '24'
+        cache: pnpm
+
+    - name: Install node dependencies
+      run: pnpm install --frozen-lockfile && pnpm build
 
     - name: Run test suite
       run: composer run-script test
