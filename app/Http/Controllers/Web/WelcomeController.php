@@ -9,6 +9,9 @@ use Inertia\Response;
 
 final class WelcomeController extends Controller
 {
+    /**
+     * Show the welcome page.
+     */
     public function index(): Response
     {
         return inertia('WelcomePage');

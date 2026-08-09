@@ -23,7 +23,7 @@ it('cannot invite users to a trip that is not owned', function (): void {
             'user_ids' => $users->pluck('id')->toArray(),
             'role' => 'viewer',
         ])
-        ->assertRedirectToRoute('dashboard')
+        ->assertRedirectToroute('home')
         ->assertSessionHas('error', 'This action is unauthorized.');
 
     assertDatabaseEmpty('trip_user');

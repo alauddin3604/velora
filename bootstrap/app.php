@@ -35,7 +35,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $exceptions->render(function (Throwable $exception) {
             if ($exception->getPrevious() instanceof AuthorizationException) {
-                return to_route('dashboard')->with('error', $exception->getMessage());
+                return to_route('home')->with('error', $exception->getMessage());
             }
         });
     })

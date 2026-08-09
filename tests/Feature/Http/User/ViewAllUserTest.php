@@ -36,7 +36,7 @@ test('non super admin cannot view all users', function (): void {
 
     actingAs($user)
         ->get($this->endpoint)
-        ->assertRedirect(route('dashboard'))
+        ->assertRedirect(route('home'))
         ->assertSessionHas('error', 'This action is unauthorized.');
 });
 
@@ -47,7 +47,7 @@ test('admin cannot view all users', function (): void {
 
     actingAs($user)
         ->get($this->endpoint)
-        ->assertRedirect(route('dashboard'))
+        ->assertRedirect(route('home'))
         ->assertSessionHas('error', 'This action is unauthorized.');
 });
 
@@ -58,6 +58,6 @@ test('user cannot view all users', function (): void {
 
     actingAs($user)
         ->get($this->endpoint)
-        ->assertRedirect(route('dashboard'))
+        ->assertRedirect(route('home'))
         ->assertSessionHas('error', 'This action is unauthorized.');
 });

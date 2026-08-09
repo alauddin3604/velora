@@ -28,6 +28,6 @@ final class UserRegistrationController extends Controller
     {
         $action->run(SignupData::from($request->validated()));
 
-        return to_route('dashboard')->with('success', 'You have successfully signed up!');
+        return to_route('home')->with('success', 'You have successfully signed up!');
     }
 }

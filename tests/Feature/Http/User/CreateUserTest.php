@@ -29,7 +29,7 @@ test('admin cannot create user', function (): void {
 
     actingAs($user)
         ->get(route('users.create'))
-        ->assertRedirect(route('dashboard'))
+        ->assertRedirect(route('home'))
         ->assertSessionHas('error', 'This action is unauthorized.');
 });
 
@@ -40,7 +40,7 @@ test('user cannot create user', function (): void {
 
     actingAs($user)
         ->get(route('users.create'))
-        ->assertRedirect(route('dashboard'))
+        ->assertRedirect(route('home'))
         ->assertSessionHas('error', 'This action is unauthorized.');
 });
 
