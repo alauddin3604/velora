@@ -12,7 +12,7 @@ it('can view dashboard if authenticated', function (): void {
     $user = createUser();
 
     actingAs($user)
-        ->get('/')
+        ->get('home')
         ->assertOk()
         ->assertInertia(
             fn (AssertableInertia $page): AssertableInertia => $page
@@ -26,5 +26,5 @@ it('can view dashboard if authenticated', function (): void {
 it('cannot view dashboard if not authenticated', function (): void {
     assertGuest();
 
-    get('/')->assertRedirect('/login');
+    get('home')->assertRedirect('/login');
 });

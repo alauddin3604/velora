@@ -19,5 +19,5 @@ it('can view login page', function (): void {
 it('cannot view login page if authenticated', function (): void {
     actingAs(createUser())
         ->get('/login')
-        ->assertRedirect(route('dashboard'));
+        ->assertRedirect(route('home'));
 });

@@ -51,7 +51,7 @@ test('admin cannot store new user', function (): void {
             'email' => 'jamfox@example.com',
             'password' => 'password',
         ])
-        ->assertRedirect(route('dashboard'))
+        ->assertRedirect(route('home'))
         ->assertSessionHas('error', 'This action is unauthorized.');
 
     assertDatabaseCount('users', 1);

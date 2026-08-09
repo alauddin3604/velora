@@ -58,7 +58,7 @@ const data = {
   navMain: [
     {
       title: 'Dashboard',
-      url: route('dashboard'),
+      url: route('home'),
       icon: PieChart,
       isActive: page.url === '/',
     },

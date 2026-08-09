@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Web\Authentication\AuthenticatedSessionController;
 use App\Http\Controllers\Web\Authentication\ForgotPasswordController;
+use App\Http\Controllers\Web\Authentication\HandleSocialCallbackController;
+use App\Http\Controllers\Web\Authentication\RedirectSocialController;
 use App\Http\Controllers\Web\Authentication\ResetPasswordController;
-use App\Http\Controllers\Web\Authentication\SocialController;
 use App\Http\Controllers\Web\Authentication\UserRegistrationController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,9 +22,9 @@ Route::post('forgot-password', [ForgotPasswordController::class, 'store'])->name
 Route::get('reset-password/{token}', [ResetPasswordController::class, 'create'])->name('password.reset')->middleware('guest');
 Route::post('reset-password', [ResetPasswordController::class, 'store'])->name('password.update')->middleware('guest');
 
-Route::get('auth/{provider}/redirect', [SocialController::class, 'redirect'])
+Route::get('auth/{provider}/redirect', RedirectSocialController::class)
     ->name('auth.social.redirect')
     ->middleware('guest');
 
-Route::get('auth/{provider}/callback', [SocialController::class, 'callback'])
+Route::get('auth/{provider}/callback', HandleSocialCallbackController::class)
     ->name('auth.social.callback');

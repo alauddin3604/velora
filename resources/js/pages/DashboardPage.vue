@@ -12,7 +12,7 @@ defineProps<{
 const breadcrumbs = ref<DashboardBreadcrumb[]>([
   {
     label: 'Dashboard',
-    url: route('dashboard'),
+    url: route('home'),
   },
 ])
 </script>
